@@ -4,11 +4,11 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
-import Header from './components/Header';
-import DashboardPage from './pages/DashboardPage';
+import Header from '/components/Header';
+import DashboardPage from '/pages/DashboardPage';
 import CoinPage from './pages/CoinPage';
 import WatchlistPage from './pages/WatchlistPage';
-import { WatchlistProvider } from './context/WatchlistContext';
+import { WatchlistProvider } from '/context/WatchlistContext';
 
 function App() {
   const [mode, setMode] = useState('light');

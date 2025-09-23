@@ -4,7 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { TableRow, TableCell, Avatar, Typography, Box, Link, IconButton } from '@mui/material';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';
-import { useWatchlist } from '../context/WatchlistContext';
+import { useWatchlist } from './context/WatchlistContext';
 
 const CoinRow = ({ coin }) => {
   const { watchlist, addCoin, removeCoin } = useWatchlist();
