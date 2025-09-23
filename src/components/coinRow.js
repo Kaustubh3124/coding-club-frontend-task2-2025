@@ -1,14 +1,35 @@
 // src/components/CoinRow.js
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { TableRow, TableCell, Avatar, Typography, Box, Link } from '@mui/material';
+import { TableRow, TableCell, Avatar, Typography, Box, Link, IconButton } from '@mui/material';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+import StarIcon from '@mui/icons-material/Star';
+import { useWatchlist } from '../context/WatchlistContext';
 
 const CoinRow = ({ coin }) => {
+  const { watchlist, addCoin, removeCoin } = useWatchlist();
+  const isSaved = watchlist.includes(coin.id);
+
+  const handleSaveClick = (e) => {
+    // This stops the click from navigating to the coin page
+    e.stopPropagation();
+    if (isSaved) {
+      removeCoin(coin.id);
+    } else {
+      addCoin(coin.id);
+    }
+  };
+
   const priceChange = coin.price_change_percentage_24h;
-  const priceChangeColor = priceChange > 0 ? 'success.main' : 'error.main'; // Use theme colors
+  const priceChangeColor = priceChange > 0 ? 'success.main' : 'error.main';
 
   return (
     <TableRow hover>
+      <TableCell padding="checkbox">
+        <IconButton onClick={handleSaveClick} aria-label="add to watchlist">
+          {isSaved ? <StarIcon color="warning" /> : <StarBorderIcon />}
+        </IconButton>
+      </TableCell>
       <TableCell component="th" scope="row">
         <Link component={RouterLink} to={`/coin/${coin.id}`} color="inherit" underline="none">
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>

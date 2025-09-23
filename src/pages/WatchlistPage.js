@@ -1,67 +1,62 @@
-// src/pages/DashboardPage.js
+// src/pages/WatchlistPage.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, CircularProgress, Box } from '@mui/material';
+import { Container, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, CircularProgress, Box } from '@mui/material';
+import { useWatchlist } from '../context/WatchlistContext';
 import CoinRow from '../components/CoinRow';
-import Pagination from '../components/Pagination';
 
-const DashboardPage = () => {
+const WatchlistPage = () => {
+  const { watchlist } = useWatchlist();
   const [coins, setCoins] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);
-  const [search, setSearch] = useState('');
 
   useEffect(() => {
-    const fetchCoins = async () => {
+    if (watchlist.length === 0) {
+      setLoading(false);
+      setCoins([]);
+      return;
+    }
+
+    const fetchWatchlistCoins = async () => {
       setLoading(true);
       try {
         const response = await axios.get('https://api.coingecko.com/api/v3/coins/markets', {
           params: {
             vs_currency: 'usd',
-            order: 'market_cap_desc',
-            per_page: 50,
-            page: page,
-            sparkline: false,
+            ids: watchlist.join(','), // Pass saved coin IDs to the API
           },
         });
         setCoins(response.data);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching watchlist data:", error);
       }
       setLoading(false);
     };
-    fetchCoins();
-  }, [page]);
 
-  const handleSearch = (e) => {
-    setSearch(e.target.value);
-  };
+    fetchWatchlistCoins();
+  }, [watchlist]);
 
-  const filteredCoins = coins.filter(coin =>
-    coin.name.toLowerCase().includes(search.toLowerCase()) ||
-    coin.symbol.toLowerCase().includes(search.toLowerCase())
-  );
+  if (loading) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', my: 4 }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
 
   return (
     <Container sx={{ py: 4 }}>
-      <TextField
-        label="Search for a coin..."
-        variant="outlined"
-        fullWidth
-        onChange={handleSearch}
-        sx={{ mb: 4 }}
-      />
-
-      {loading ? (
-        <Box sx={{ display: 'flex', justifyContent: 'center', my: 4 }}>
-          <CircularProgress />
-        </Box>
+      <Typography variant="h4" component="h1" gutterBottom>
+        My Watchlist
+      </Typography>
+      {coins.length === 0 ? (
+        <Typography>Your watchlist is empty. Add coins from the dashboard by clicking the star icon.</Typography>
       ) : (
         <TableContainer component={Paper}>
-          <Table aria-label="crypto table">
+          <Table>
             <TableHead>
               <TableRow sx={{ '& .MuiTableCell-head': { fontWeight: 'bold' } }}>
-                 <TableCell padding="checkbox"></TableCell>
+                <TableCell padding="checkbox"></TableCell>
                 <TableCell>Coin</TableCell>
                 <TableCell align="right">Price</TableCell>
                 <TableCell align="right">24h Change</TableCell>
@@ -70,16 +65,15 @@ const DashboardPage = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {filteredCoins.map((coin) => (
+              {coins.map((coin) => (
                 <CoinRow key={coin.id} coin={coin} />
               ))}
             </TableBody>
           </Table>
         </TableContainer>
       )}
-      <Pagination page={page} setPage={setPage} />
     </Container>
   );
 };
 
-export default DashboardPage;
+export default WatchlistPage;
