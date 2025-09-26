@@ -1,4 +1,4 @@
-// src/components/CoinRow.js
+
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { TableRow, TableCell, Avatar, Typography, Box, Link, IconButton } from '@mui/material';

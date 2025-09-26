@@ -1,4 +1,4 @@
-// src/pages/DashboardPage.js
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, CircularProgress, Box, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
@@ -11,7 +11,6 @@ const DashboardPage = () => {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
   
-  // New state for filters
   const [filter, setFilter] = useState('all'); 
 
   useEffect(() => {
@@ -22,7 +21,7 @@ const DashboardPage = () => {
           params: {
             vs_currency: 'usd',
             order: 'market_cap_desc',
-            per_page: 100, // Fetch more to make filtering more effective
+            per_page: 100, 
             page: page,
             sparkline: false,
           },
@@ -50,14 +49,13 @@ const DashboardPage = () => {
       coin.symbol.toLowerCase().includes(search.toLowerCase())
     )
     .sort((a, b) => {
-      // Apply sorting based on the filter
       if (filter === 'gainers') {
         return b.price_change_percentage_24h - a.price_change_percentage_24h;
       }
       if (filter === 'losers') {
         return a.price_change_percentage_24h - b.price_change_percentage_24h;
       }
-      return 0; // Default order (market cap)
+      return 0; 
     });
 
   return (

@@ -1,12 +1,11 @@
-// src/components/Header.js
+
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Link, Box, IconButton } from '@mui/material';
-import Brightness4Icon from '@mui/icons-material/Brightness4'; // Dark mode icon
-import Brightness7Icon from '@mui/icons-material/Brightness7'; // Light mode icon
+import Brightness4Icon from '@mui/icons-material/Brightness4'; 
+import Brightness7Icon from '@mui/icons-material/Brightness7'; 
 import { useTheme } from '@mui/material/styles';
 
-// We pass the toggle function down from App.js
 const Header = ({ toggleColorMode }) => {
   const theme = useTheme();
 

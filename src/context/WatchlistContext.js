@@ -1,16 +1,13 @@
-// src/context/WatchlistContext.js
+
 import React, { createContext, useContext } from 'react';
 import useLocalStorage from '../hooks/useLocalStorage';
 
-// Create the context
 const WatchlistContext = createContext();
 
-// Create a custom hook to easily use the context
 export const useWatchlist = () => {
   return useContext(WatchlistContext);
 };
 
-// Create the provider component
 export const WatchlistProvider = ({ children }) => {
   const [watchlist, setWatchlist] = useLocalStorage('watchlist', []);
 

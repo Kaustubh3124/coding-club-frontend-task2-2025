@@ -1,4 +1,4 @@
-// src/pages/CoinPage.js
+
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -9,7 +9,7 @@ const CoinPage = () => {
   const { id } = useParams();
   const [coin, setCoin] = useState(null);
   const [chartData, setChartData] = useState([]);
-  const [days, setDays] = useState(7); // Default to 7 days
+  const [days, setDays] = useState(7); 
 
   useEffect(() => {
     const fetchCoinData = async () => {
@@ -43,7 +43,6 @@ const CoinPage = () => {
     );
   }
 
-  // Sanitize the description HTML provided by the API
   const sanitizedDescription = coin.description.en.replace(/<a/g, '<a target="_blank" rel="noopener noreferrer"');
 
   return (

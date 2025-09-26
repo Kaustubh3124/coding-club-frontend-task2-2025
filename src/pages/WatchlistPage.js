@@ -1,4 +1,4 @@
-// src/pages/WatchlistPage.js
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, CircularProgress, Box } from '@mui/material';
@@ -23,7 +23,7 @@ const WatchlistPage = () => {
         const response = await axios.get('https://api.coingecko.com/api/v3/coins/markets', {
           params: {
             vs_currency: 'usd',
-            ids: watchlist.join(','), // Pass saved coin IDs to the API
+            ids: watchlist.join(','), 
           },
         });
         setCoins(response.data);
