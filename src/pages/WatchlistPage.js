@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, CircularProgress, Box } from '@mui/material';
-import { useWatchlist } from '..WatchlistContext/context/WatchlistContext';
+import { useWatchlist } from '../context/WatchlistContext'; 
 import CoinRow from '../components/CoinRow';
 
 const WatchlistPage = () => {

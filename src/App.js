@@ -7,7 +7,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 // --- CORRECTED IMPORT PATHS ---
 import Header from './components/Header';
 import DashboardPage from './pages/DashboardPage';
-import CoinPage from './pages-CoinPage';
+import CoinPage from './pages/CoinPage';
 import WatchlistPage from './pages/WatchlistPage';
 import { WatchlistProvider } from './context/WatchlistContext';
 

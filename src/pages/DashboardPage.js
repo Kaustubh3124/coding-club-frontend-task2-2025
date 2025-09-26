@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, CircularProgress, Box, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
-import CoinRow from '../components/CoinRow';
+import CoinRow from '../components/CoinRow'; 
 import Pagination from '../components/Pagination';
 
 const DashboardPage = () => {
