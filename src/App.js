@@ -4,11 +4,12 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
-import Header from '/components/Header';
-import DashboardPage from '/pages/DashboardPage';
-import CoinPage from './pages/CoinPage';
+// --- CORRECTED IMPORT PATHS ---
+import Header from './components/Header';
+import DashboardPage from './pages/DashboardPage';
+import CoinPage from './pages-CoinPage';
 import WatchlistPage from './pages/WatchlistPage';
-import { WatchlistProvider } from '/context/WatchlistContext';
+import { WatchlistProvider } from './context/WatchlistContext';
 
 function App() {
   const [mode, setMode] = useState('light');
@@ -30,7 +31,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <WatchlistProvider> {/* Add this line */}
+      <WatchlistProvider>
         <Router>
           <Header toggleColorMode={toggleColorMode} />
           <main>
@@ -41,7 +42,7 @@ function App() {
             </Routes>
           </main>
         </Router>
-      </WatchlistProvider> {/* And close it here */}
+      </WatchlistProvider>
     </ThemeProvider>
   );
 }
